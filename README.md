@@ -1,7 +1,7 @@
 # Community Data Storage Hub
 
 ## Project Team
-- Frank Ashington Munene  
+- Ashington Munene  
 - Mercy Kinya  
 - Mike Muteithia  
 
