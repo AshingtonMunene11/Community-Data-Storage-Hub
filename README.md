@@ -16,8 +16,6 @@ The Minimum Viable Product (MVP) focuses on:
 - User-to-node storage allocation
 - Administrative oversight of usage and capacity
 
-The MVP is designed to meet academic evaluation criteria while remaining extensible for real-world deployment.
-
 ## Technologies Used
 
 ### Backend
