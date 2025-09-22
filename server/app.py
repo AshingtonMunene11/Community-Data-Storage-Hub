@@ -1,5 +1,5 @@
 from flask import Flask 
-from extensions import db, ma 
+from extensions import db, ma, migrate
 from routes.users import users_bp
 from routes.storage_nodes import storage_nodes_bp
 import config
@@ -9,16 +9,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(config.Config)
 
+    # Initialize extensions
     db.init_app(app)
     ma.init_app(app)
-
-    with app.app_context():
-        db.create_all()
-
+    migrate.init_app(app, db) # Enable Flask-Migrate
     
-    # register routes
-    app.register_blueprint(users_bp)
-    app.register_blueprint(storage_nodes_bp)
+    # Register blueprints with prefixes
+    app.register_blueprint(users_bp, url_prefix="/users")
+    app.register_blueprint(storage_nodes_bp, url_prefix="/storage-nodes")
 
     @app.route("/")
     def home():
@@ -29,12 +27,7 @@ def create_app():
     return app
 
 
-
-
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
-
-
-
 
