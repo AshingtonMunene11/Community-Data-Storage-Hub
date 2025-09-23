@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from extensions import db
+from .storage_node import StorageNode
+from server.extensions import db
 
 class Allocation(db.Model):
     __tablename__ = 'allocations'
@@ -22,4 +23,5 @@ class Allocation(db.Model):
 
     upload = db.relationship('Upload', backref='allocations')
     storage_node = db.relationship('StorageNode', backref='allocations')
+    node = db.relationship('StorageNode', backref='allocations')
 
