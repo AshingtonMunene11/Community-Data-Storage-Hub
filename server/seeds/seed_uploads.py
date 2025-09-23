@@ -6,13 +6,13 @@ import random
 
 fake = Faker()
 
-def seed_uploads():
+def seed_uploads(num_uploads=10):
     users = User.query.all()
     if not users:
         print("No users found. Seed users first.")
         return
 
-    for _ in range(10):
+    for _ in range(num_uploads):
         user = random.choice(users)
         upload = Upload(
             filename=fake.file_name(extension=random.choice(['pdf', 'jpg', 'docx', 'mp4'])),
@@ -20,6 +20,11 @@ def seed_uploads():
             user_id=user.id
         )
         db.session.add(upload)
+        print(f"✅ Created upload '{upload.filename}' ({upload.size}MB) for user {user.id}")
 
-    db.session.commit()
-    print("Seeded 10 uploads.")
+    try:
+        db.session.commit()
+        print(f"🎉 Seeded {num_uploads} uploads.")
+    except Exception as e:
+        db.session.rollback()
+        print(f"Upload seeding failed: {e}")

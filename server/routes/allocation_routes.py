@@ -1,7 +1,9 @@
 from flask import Blueprint, request, jsonify
 from extensions import db
 from server.models.allocation import Allocation
-from server.models.schemas.allocation_schema import AllocationSchema
+from marshmallow import ValidationError
+from server.schemas.allocation_schema import AllocationSchema
+#from server.models.schemas.allocation_schema import AllocationSchema
 
 allocation_bp = Blueprint('allocation_bp', __name__)
 allocation_schema = AllocationSchema()
@@ -10,7 +12,11 @@ allocations_schema = AllocationSchema(many=True)
 @allocation_bp.route('/allocations', methods=['POST'])
 def create_allocation():
     data = request.get_json()
-    validated = allocation_schema.load(data)
+    try:
+        validated = allocation_schema.load(data)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
+
     new_allocation = Allocation(**validated)
     db.session.add(new_allocation)
     db.session.commit()
@@ -27,3 +33,4 @@ def delete_allocation(id):
     db.session.delete(allocation)
     db.session.commit()
     return jsonify({"message": "Allocation deleted"}), 200
+
