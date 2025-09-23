@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from extensions import db
+from server.extensions import db
 from server.models.allocation import Allocation
 from marshmallow import ValidationError
 from server.models.storage_node import StorageNode
