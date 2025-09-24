@@ -1,9 +1,10 @@
 # Community Data Storage Hub
 
 ## Project Team
-- Ashington Munene  
-- Mercy Kinya  
+- Ashington Munene
 - Mike Muteithia  
+- Mercy Kinya  
+ 
 
 ## Overview
 The Community Data Storage Hub is a web-based platform designed to manage digital storage allocations in shared environments. It enables users to register, submit file metadata, and assign storage nodes. Administrators can monitor usage, manage allocations, and ensure equitable distribution of digital resources.
