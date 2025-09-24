@@ -20,3 +20,4 @@ Thumbs.db
 *.o
 # Next.js build output
 .next/
+node_modules/

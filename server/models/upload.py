@@ -13,4 +13,4 @@ class Upload(db.Model):
 
     user = db.relationship('User', backref='uploads')
     #allocations = db.relationship('Allocation', backref='upload', cascade='all, delete-orphan')
-    allocations = db.relationship('Allocation', back_populates='upload', cascade='all, delete-orphan')
+    #allocations = db.relationship('Allocation', back_populates='upload', cascade='all, delete-orphan')

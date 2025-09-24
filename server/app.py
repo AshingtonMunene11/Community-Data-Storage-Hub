@@ -5,13 +5,13 @@ from server.routes.users import users_bp
 from server.routes.storage_nodes_bp import storage_nodes_bp
 from server.routes.upload_routes import upload_bp
 from server.routes.allocation_routes import allocation_bp
-import config
+from .config import Config
+
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(config.Config)
+    app.config.from_object(Config)
     
-    # Enable CORS
     CORS(app)
 
     # Initialize extensions
@@ -19,14 +19,24 @@ def create_app():
     ma.init_app(app)
     migrate.init_app(app, db)
 
-    with app.app_context():
-        # Register blueprints
-        app.register_blueprint(users_bp, url_prefix="/api/users")
-        app.register_blueprint(storage_nodes_bp, url_prefix="/api/storage-nodes")
-        app.register_blueprint(upload_bp, url_prefix="/api")
-        app.register_blueprint(allocation_bp, url_prefix="/api")
+    """
+    app.register_blueprint(users_bp, url_prefix="/api/users")
+    app.register_blueprint(storage_nodes_bp, url_prefix="/api/storage-nodes")
+    app.register_blueprint(upload_bp, url_prefix="/api/uploads")
+    app.register_blueprint(allocation_bp, url_prefix="/api/allocations")
+    """
+
+    app.register_blueprint(users_bp, url_prefix="/api/users")
+    app.register_blueprint(upload_bp, url_prefix="/api/uploads")
+    app.register_blueprint(allocation_bp, url_prefix="/api/allocations")
+    app.register_blueprint(storage_nodes_bp, url_prefix="/api/storage-nodes")
+
 
     return app
 
-app = create_app()
-db = db
+
+#test whether the app is runing using the following code, uncomment it when needed
+"""
+@app.route("/hello")
+def hello():
+    return "Hello World!"""

@@ -8,6 +8,8 @@ class Allocation(db.Model):
     storage_node_id = db.Column(db.Integer, db.ForeignKey('storage_nodes.id'), nullable=False)
     allocated_size = db.Column(db.Float, nullable=False)
 
+    chunk_index = db.Column(db.Integer, nullable=True)
+
     upload = db.relationship('Upload', backref='allocations')
     #storage_node = db.relationship('StorageNode', backref='allocations')
     storage_node = db.relationship('StorageNode', backref='allocations')

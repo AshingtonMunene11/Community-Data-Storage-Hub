@@ -2,6 +2,91 @@ from flask import Blueprint, request, jsonify, current_app
 from server.extensions import db
 from server.models.user import User
 from server.schemas.user_schema import UserSchema
+from marshmallow import ValidationError
+import jwt
+from datetime import datetime, timedelta
+
+# Blueprint
+users_bp = Blueprint("users_bp", __name__)
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
+
+# ------------------------
+# Create User
+# ------------------------
+@users_bp.route("/", methods=["POST"])
+def create_user():
+    data = request.get_json()
+    try:
+        validated = user_schema.load(data)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
+
+    if User.query.filter_by(email=validated["email"]).first():
+        return jsonify({"error": "Email already exists"}), 400
+
+    new_user = User(
+        username=validated.get("username"),
+        email=validated["email"],
+        role=validated.get("role", "user")
+    )
+    new_user.set_password(validated["password"])
+
+    db.session.add(new_user)
+    db.session.commit()
+    return user_schema.dump(new_user), 201
+
+# ------------------------
+# Get Users
+# ------------------------
+@users_bp.route("/", methods=["GET"])
+def get_users():
+    users = User.query.all()
+    return users_schema.dump(users), 200
+
+# ------------------------
+# User Login
+# ------------------------
+@users_bp.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
+
+    if not email or not password:
+        return jsonify({"error": "Email and password required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not user.check_password(password):
+        return jsonify({"error": "Invalid credentials"}), 401
+
+    token = jwt.encode(
+        {"user_id": user.id, "exp": datetime.utcnow() + timedelta(hours=1)},
+        current_app.config["SECRET_KEY"],
+        algorithm="HS256"
+    )
+
+    return jsonify({
+        "token": token,
+        "username": user.username,
+        "role": user.role
+    }), 200
+
+# ------------------------
+# Delete User
+# ------------------------
+@users_bp.route("/<int:id>", methods=["DELETE"])
+def delete_user(id):
+    user = User.query.get_or_404(id)
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({"message": "User deleted"}), 200
+
+
+"""from flask import Blueprint, request, jsonify, current_app
+from server.extensions import db
+from server.models.user import User
+from server.schemas.user_schema import UserSchema
 import jwt
 from datetime import datetime, timedelta
 
@@ -62,3 +147,4 @@ def login():
 
     return jsonify({"token": token, "username": user.username, "role": user.role})
 
+"""

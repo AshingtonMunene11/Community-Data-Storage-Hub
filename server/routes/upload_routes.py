@@ -4,11 +4,15 @@ from server.models.upload import Upload
 from server.schemas.upload_schema import UploadSchema
 from marshmallow import ValidationError
 
+# Blueprint
 upload_bp = Blueprint('upload_bp', __name__)
 upload_schema = UploadSchema()
 uploads_schema = UploadSchema(many=True)
 
-@upload_bp.route('/uploads', methods=['POST'])
+# -------------------------
+# Create Upload
+# -------------------------
+@upload_bp.route("/", methods=["POST"])
 def create_upload():
     data = request.get_json()
     try:
@@ -21,7 +25,10 @@ def create_upload():
     db.session.commit()
     return upload_schema.dump(new_upload), 201
 
-@upload_bp.route('/uploads', methods=['GET'])
+# -------------------------
+# Get Uploads
+# -------------------------
+@upload_bp.route("/", methods=["GET"])
 def get_uploads():
     user_id = request.args.get('user_id')
     query = Upload.query
@@ -30,12 +37,16 @@ def get_uploads():
     uploads = query.all()
     return uploads_schema.dump(uploads), 200
 
-@upload_bp.route('/uploads/<int:id>', methods=['DELETE'])
+# -------------------------
+# Delete Upload
+# -------------------------
+@upload_bp.route("/<int:id>", methods=["DELETE"])
 def delete_upload(id):
     upload = Upload.query.get_or_404(id)
     db.session.delete(upload)
     db.session.commit()
     return jsonify({"message": "Upload deleted"}), 200
+
 
 """
 from flask import Blueprint, request, jsonify
