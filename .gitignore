@@ -1,0 +1,22 @@
+# Node.js
+node_modules/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Compiled C files
+*.o
+# Next.js build output
+.next/
