@@ -9,5 +9,6 @@ class Allocation(db.Model):
     allocated_size = db.Column(db.Float, nullable=False)
 
     upload = db.relationship('Upload', backref='allocations')
+    #storage_node = db.relationship('StorageNode', backref='allocations')
     storage_node = db.relationship('StorageNode', backref='allocations')
 
