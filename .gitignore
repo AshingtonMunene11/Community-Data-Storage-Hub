@@ -1,5 +1,6 @@
 # Node.js
 node_modules/
+client1/node_modules/
 *.log
 
 # Python
@@ -18,6 +19,6 @@ Thumbs.db
 
 # Compiled C files
 *.o
+
 # Next.js build output
 .next/
-node_modules/
