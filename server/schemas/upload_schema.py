@@ -9,7 +9,7 @@ class UploadSchema(Schema):
     user_id = fields.Int(required=True)
 
     user = fields.Nested(UserSchema, dump_only=True)
-    allocations = fields.List(fields.Nested('AllocationSchema'), dump_only=True)    
+    #allocations = fields.List(fields.Nested('AllocationSchema'), dump_only=True)    
 
 """
 from marshmallow import Schema, fields

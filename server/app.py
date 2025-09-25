@@ -27,7 +27,8 @@ def create_app():
     """
 
     app.register_blueprint(users_bp, url_prefix="/api/users")
-    app.register_blueprint(upload_bp, url_prefix="/api/uploads")
+    #app.register_blueprint(upload_bp, url_prefix="/api/uploads")
+    app.register_blueprint(upload_bp, url_prefix="/api")
     app.register_blueprint(allocation_bp, url_prefix="/api/allocations")
     app.register_blueprint(storage_nodes_bp, url_prefix="/api/storage-nodes")
 
