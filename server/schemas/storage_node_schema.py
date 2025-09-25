@@ -1,5 +1,6 @@
-from server.models.storage_node import StorageNode
-from server.extensions import ma
+from ..models.storage_node import StorageNode
+from ..extensions import ma
+from marshmallow import fields
 
 class StorageNodeSchema(ma.SQLAlchemySchema):
     class Meta:
@@ -12,4 +13,6 @@ class StorageNodeSchema(ma.SQLAlchemySchema):
     used = ma.auto_field()
     location = ma.auto_field()
     status = ma.auto_field()
+
+    allocations = fields.List(fields.Nested('AllocationSchema', exclude=('storage_node',)), dump_only=True)
 

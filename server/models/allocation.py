@@ -1,4 +1,4 @@
-from server.extensions import db
+from ..extensions import db
 
 class Allocation(db.Model):
     __tablename__ = 'allocations'
@@ -8,6 +8,5 @@ class Allocation(db.Model):
     storage_node_id = db.Column(db.Integer, db.ForeignKey('storage_nodes.id'), nullable=False)
     allocated_size = db.Column(db.Float, nullable=False)
 
-    upload = db.relationship('Upload', backref='allocations')
-    storage_node = db.relationship('StorageNode', backref='allocations')
+    upload = db.relationship('Upload', back_populates='allocations')
 

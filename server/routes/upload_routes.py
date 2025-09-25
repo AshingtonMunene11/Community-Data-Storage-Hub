@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from server.extensions import db
-from server.models.upload import Upload
-from server.schemas.upload_schema import UploadSchema
+from ..extensions import db
+from ..models.upload import Upload
+from ..schemas.upload_schema import UploadSchema
 from marshmallow import ValidationError
 
 upload_bp = Blueprint('upload_bp', __name__)
@@ -12,11 +12,10 @@ uploads_schema = UploadSchema(many=True)
 def create_upload():
     data = request.get_json()
     try:
-        validated = upload_schema.load(data)
+        new_upload = upload_schema.load(data)
     except ValidationError as err:
         return jsonify(err.messages), 400
 
-    new_upload = Upload(**validated)
     db.session.add(new_upload)
     db.session.commit()
     return upload_schema.dump(new_upload), 201
@@ -29,6 +28,29 @@ def get_uploads():
         query = query.filter_by(user_id=user_id)
     uploads = query.all()
     return uploads_schema.dump(uploads), 200
+
+@upload_bp.route('/uploads/<int:id>', methods=['GET'])
+def get_upload(id):
+    upload = Upload.query.get(id)
+    if not upload:
+        return jsonify({"error": "upload not found"}), 404
+    return upload_schema.dump(upload), 200
+
+@upload_bp.route('/uploads/<int:id>', methods=['PUT'])
+def update_upload(id):
+    upload = Upload.query.get_or_404(id)
+    data = request.get_json()
+
+    try:
+        validated = upload_schema.load(data, partial=True)
+    except ValidationError as err:
+        return jsonify(err.messages), 400
+    
+    for key, value in validated.items():
+        setattr(upload, key, value)
+
+    db.session.commit()
+    return upload_schema.dump(upload), 200
 
 @upload_bp.route('/uploads/<int:id>', methods=['DELETE'])
 def delete_upload(id):

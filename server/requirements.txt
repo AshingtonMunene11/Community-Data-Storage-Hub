@@ -19,3 +19,4 @@ zipp==3.20.2
 PyJWT==2.9.0
 Flask-Migrate==4.1.0
 marshmallow-sqlalchemy==1.1.1
+Faker

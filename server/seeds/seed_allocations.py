@@ -1,8 +1,8 @@
 from faker import Faker
-from extensions import db
-from server.models.allocation import Allocation
-from server.models.upload import Upload
-from server.models.storage_node import StorageNode
+from ..extensions import db
+from ..models.allocation import Allocation
+from ..models.upload import Upload
+from ..models.storage_node import StorageNode
 import random
 
 fake = Faker()
@@ -23,9 +23,8 @@ def seed_allocations():
             node = random.choice(nodes)
             allocation = Allocation(
                 upload_id=upload.id,
-                node_id=node.id,
+                storage_node_id=node.id,
                 allocated_size=chunk_size,
-                chunk_index=i
             )
             db.session.add(allocation)
             print(f"Allocated {chunk_size}MB of '{upload.filename}' to node {node.id} [chunk {i}]")

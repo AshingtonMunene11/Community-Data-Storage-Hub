@@ -1,28 +1,20 @@
-from marshmallow import Schema, fields
-from server.schemas.user_schema import UserSchema
+from marshmallow import fields
+from ..extensions import ma
+from ..models.upload import Upload
+# from ..schemas.allocation_schema import AllocationSchema
+from ..schemas.user_schema import UserSchema
 
-class UploadSchema(Schema):
-    id = fields.Int(dump_only=True)
-    filename = fields.Str(required=True)
-    size = fields.Float(required=True)
-    timestamp = fields.DateTime(dump_only=True)
-    user_id = fields.Int(required=True)
+
+class UploadSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = Upload
+        load_instance = True
+
+    id = ma.auto_field(dump_only=True)
+    filename = ma.auto_field(required=True)
+    size = ma.auto_field(required=True)
+    timestamp = ma.auto_field(dump_only=True)
+    user_id = ma.auto_field(required=True)
 
     user = fields.Nested(UserSchema, dump_only=True)
-    allocations = fields.List(fields.Nested('AllocationSchema'), dump_only=True)    
-
-"""
-from marshmallow import Schema, fields
-from server.models import User
-from server.models.schemas.user_schema import UserSchema  
-
-class UploadSchema(Schema):
-    id = fields.Int(dump_only=True)
-    filename = fields.Str(required=True)
-    size = fields.Float(required=True)
-    timestamp = fields.DateTime(dump_only=True)
-    user_id = fields.Int(required=True)
-
-    
-    user = fields.Nested(UserSchema, dump_only=True)
-"""
+    allocations = fields.List(fields.Nested('AllocationSchema', exclude=('upload',)), dump_only=True)    

@@ -1,7 +1,7 @@
 from faker import Faker
-from extensions import db
-from server.models.upload import Upload
-from server.models.user import User
+from ..extensions import db
+from ..models.upload import Upload
+from ..models.user import User
 import random
 
 fake = Faker()
@@ -20,11 +20,11 @@ def seed_uploads(num_uploads=10):
             user_id=user.id
         )
         db.session.add(upload)
-        print(f"✅ Created upload '{upload.filename}' ({upload.size}MB) for user {user.id}")
+        print(f"Created upload '{upload.filename}' ({upload.size}MB) for user {user.id}")
 
     try:
         db.session.commit()
-        print(f"🎉 Seeded {num_uploads} uploads.")
+        print(f"Seeded {num_uploads} uploads.")
     except Exception as e:
         db.session.rollback()
         print(f"Upload seeding failed: {e}")

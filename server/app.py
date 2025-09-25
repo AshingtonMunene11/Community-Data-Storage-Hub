@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
-from server.extensions import db, ma, migrate
-from server.routes.users import users_bp
-from server.routes.storage_nodes_bp import storage_nodes_bp
-from server.routes.upload_routes import upload_bp
-from server.routes.allocation_routes import allocation_bp
-import config
+from .extensions import db, ma, migrate
+from .routes.users import users_bp
+from .routes.storage_nodes_bp import storage_nodes_bp
+from .routes.upload_routes import upload_bp
+from .routes.allocation_routes import allocation_bp
+from . import config
 
 def create_app():
     app = Flask(__name__)

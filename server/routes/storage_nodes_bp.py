@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from server.extensions import db
-from server.models.storage_node import StorageNode
-from server.schemas.storage_node_schema import StorageNodeSchema
+from ..extensions import db
+from ..models.storage_node import StorageNode
+from ..schemas.storage_node_schema import StorageNodeSchema
 from marshmallow import ValidationError
 
 storage_nodes_bp = Blueprint("storage_nodes", __name__)
@@ -17,35 +17,40 @@ def get_storage_nodes():
 def create_storage_node():
     data = request.get_json()
     try:
-        validated = storage_node_schema.load(data)
+        new_node = storage_node_schema.load(data)
+        db.session.add(new_node)
+        db.session.commit()
+        return storage_node_schema.dump(new_node), 201
     except ValidationError as err:
         return jsonify(err.messages), 400
-
-    new_node = StorageNode(**validated)
-    db.session.add(new_node)
-    db.session.commit()
-    return storage_node_schema.dump(new_node), 201
+    except Exception as e:
+        db.session.rollback()
+        print("Error creating storage node:", e)
+        return jsonify({"error": str(e)}), 500
 
 @storage_nodes_bp.route("/<int:id>", methods=["GET"])
 def get_storage_node(id):
-    node = StorageNode.query.get_or_404(id)
-    return storage_node_schema.dump(node)
+    node = StorageNode.query.get(id)
+    if not node:
+        return jsonify({"error": "StorageNode not found"}), 404
+    return storage_node_schema.dump(node), 200
 
 @storage_nodes_bp.route("/<int:id>", methods=["PUT"])
 def update_storage_node(id):
-    node = StorageNode.query.get_or_404(id)
+    node = StorageNode.query.get(id)
     data = request.get_json()
     
     try:
-        validated = storage_node_schema.load(data, partial=True)
+        updated_node = storage_node_schema.load(data, instance=node, partial=True)
+        db.session.commit()
+        return storage_node_schema.dump(updated_node)
     except ValidationError as err:
         return jsonify(err.messages), 400
+    except Exception as e:
+        db.session.rollback()
+        print("Error updating storage node:", e)
+        return jsonify({"error": str(e)}), 500
 
-    for key, value in validated.items():
-        setattr(node, key, value)
-    
-    db.session.commit()
-    return storage_node_schema.dump(node)
 
 @storage_nodes_bp.route("/<int:id>", methods=["DELETE"])
 def delete_storage_node(id):
