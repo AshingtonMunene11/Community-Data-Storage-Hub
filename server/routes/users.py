@@ -10,11 +10,13 @@ users_bp = Blueprint("users", __name__)
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
+# GET all users
 @users_bp.route("/", methods=["GET"])
 def get_users():
     users = User.query.all()
     return jsonify(users_schema.dump(users))
 
+# Signup (Register a User)
 @users_bp.route("", methods=["POST"])
 def add_user():
     data = request.get_json()
