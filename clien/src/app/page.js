@@ -1,4 +1,3 @@
-
 import Hero from '../components/Hero';
 import FeatureCard from '../components/FeatureCard';
 import ProductDemo from '../components/ProductDemo';

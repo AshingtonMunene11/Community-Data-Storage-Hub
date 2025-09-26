@@ -3,16 +3,7 @@
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Heart,
-  Globe,
-  Users,
-  Award,
-  Target,
-  Lightbulb,
-  Shield,
-  Leaf
-} from "lucide-react";
+import {Heart, Globe, Users, Award, Target, Lightbulb, Shield, Leaf}from "lucide-react";
 import './about.css';
 
 const About = () => {

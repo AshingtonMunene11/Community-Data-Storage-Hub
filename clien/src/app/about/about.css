@@ -280,7 +280,7 @@ img.rounded-2xl {
 .timeline-item::before {
   content: '✔';
   position: absolute;
-  left: -1.5rem;
+  left: -1.4rem;
   top: 0;
   background-color: #14b8a6;
   color: white;
