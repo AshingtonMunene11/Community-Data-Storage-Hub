@@ -15,13 +15,13 @@ def get_users():
     users = User.query.all()
     return jsonify(users_schema.dump(users))
 
-@users_bp.route("/register", methods=["POST"])
+@users_bp.route("", methods=["POST"])
 def add_user():
     data = request.get_json()
 
     # Validate required fields
-    if not data.get("email") or not data.get("password"):
-        return jsonify({"error": "Email and password required"}), 400
+    if not data.get("email") or not data.get("email") or not data.get("password"):
+        return jsonify({"error": "Username, email and password required"}), 400
 
     # Check if email already exists
     if User.query.filter_by(email=data["email"]).first():
@@ -64,7 +64,15 @@ def login():
     if isinstance(token, bytes):
         token = token.decode("utf-8")
 
-    return jsonify({"token": token, "username": user.username, "role": user.role})
+    return jsonify({
+        "token": token, 
+        "user": {
+            "id": user.id,
+            "username": user.username, 
+            "email": user.email,
+            "role": user.role
+        }
+    })
 
 
 # GET: get a single user by ID

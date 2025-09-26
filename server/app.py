@@ -11,8 +11,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(config.Config)
     
-    # Enable CORS
-    CORS(app)
+    # Enable CORS For all /api/* routes with credentials
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": "http://localhost:3000"}},
+        supports_credentials=True,
+        allow_headers=["Content-Type", "Authorization"], # explicitly allow headers
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"] # allow preflight
+        )
 
     # Initialize extensions
     db.init_app(app)
