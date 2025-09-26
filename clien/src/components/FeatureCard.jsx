@@ -1,34 +1,46 @@
-'use client';
+'use client'
 
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Cloud, Users, Server } from "lucide-react";
-import styles from "./FeatureCard.module.css";
+import { motion } from 'framer-motion'
+import { Card, CardContent } from '@/components/ui/card'
+import { Cloud, Users, Server } from 'lucide-react'
+import styles from './FeatureCard.module.css'
 
 const Features = () => {
   const features = [
     {
       icon: Cloud,
-      title: "Community Cloud Storage",
+      title: 'Community Cloud Storage',
       description:
-        "Secure, scalable storage solutions designed specifically for NGOs and community organizations.",
-      color: "text-ngo-green",
+        'Secure, scalable storage solutions designed specifically for NGOs and community organizations.',
+      color: 'text-ngo-green',
+      id: 'feature-storage',
     },
     {
       icon: Users,
-      title: "Collaborative Platform",
+      title: 'Collaborative Platform',
       description:
-        "Built-in sharing and collaboration tools to help your team work together seamlessly.",
-      color: "text-ngo-green-light",
+        'Built-in sharing and collaboration tools to help your team work together seamlessly.',
+      color: 'text-ngo-green-light',
+      id: 'feature-collab',
     },
     {
       icon: Server,
-      title: "99.9% Uptime",
+      title: '99.9% Uptime',
       description:
-        "Reliable infrastructure with redundant systems to ensure your data is always accessible.",
-      color: "text-tech-cyan",
+        'Reliable infrastructure with redundant systems to ensure your data is always accessible.',
+      color: 'text-tech-cyan',
+      id: 'feature-uptime',
     },
-  ];
+  ]
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -37,22 +49,29 @@ const Features = () => {
       y: 0,
       transition: { duration: 0.5 },
     },
-  };
+  }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
+    <section className={styles.section} aria-label="Platform features">
+      <motion.div
+        className={styles.container}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {features.map((feature, index) => {
-          const Icon = feature.icon;
+          const Icon = feature.icon
           return (
             <motion.div
               key={index}
               variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
               className={styles.cardWrapper}
+              tabIndex={0}
+              role="group"
+              aria-labelledby={`${feature.id}-title`}
+              aria-describedby={`${feature.id}-desc`}
             >
               <Card className={styles.card}>
                 <CardContent className={styles.cardContent}>
@@ -60,17 +79,21 @@ const Features = () => {
                     <div className={styles.iconWrapper}>
                       <Icon className={`${styles.icon} ${feature.color}`} />
                     </div>
-                    <h3 className={styles.title}>{feature.title}</h3>
+                    <h3 id={`${feature.id}-title`} className={styles.title}>
+                      {feature.title}
+                    </h3>
                   </div>
-                  <p className={styles.description}>{feature.description}</p>
+                  <p id={`${feature.id}-desc`} className={styles.description}>
+                    {feature.description}
+                  </p>
                 </CardContent>
               </Card>
             </motion.div>
-          );
+          )
         })}
-      </div>
+      </motion.div>
     </section>
-  );
-};
+  )
+}
 
-export default Features;
+export default Features
