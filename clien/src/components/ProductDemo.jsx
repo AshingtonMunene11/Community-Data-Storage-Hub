@@ -2,22 +2,45 @@
 
 import { motion } from 'framer-motion';
 import { Play, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 import Button from '@/components/ui/button';
 import './ProductDemo.css';
 
+// Animation Variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1 },
+};
+
+// Feature Card Component
+function FeatureCard({ title, description }) {
+  return (
+    <div className="feature-card">
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  );
+}
+
 export default function ProductDemo() {
   return (
-    <section className="demo-section">
+    <section className="demo-section" aria-labelledby="demo-title">
       <div className="demo-wrapper">
         {/* Section Header */}
-        <motion.div
+        <motion.header
           className="demo-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2>
+          <h2 id="demo-title">
             <span>See Our Platform</span>
             <br />
             <span>In Action</span>
@@ -26,48 +49,62 @@ export default function ProductDemo() {
             Experience the power of community-driven cloud storage through our
             intuitive dashboard and comprehensive management tools.
           </p>
-        </motion.div>
+        </motion.header>
 
         {/* Demo Preview */}
         <motion.div
           className="demo-container"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          variants={scaleIn}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <div className="demo-preview">
-            <img
-              src="/path-to-your-image.jpg" // Replace with actual image path
+            <Image
+              src="/images/ngo-dashboard-preview.jpg"
               alt="NGO Cloud Dashboard Preview"
+              width={800}
+              height={450}
+              className="rounded"
+              priority
             />
 
-            <div className="play-overlay">
-              <motion.div
-                className="play-button"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
+            <motion.div
+              className="play-overlay"
+              role="button"
+              aria-label="Play demo video"
+              tabIndex={0}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  // trigger video logic
+                }
+              }}
+            >
+              <div className="play-button">
                 <Play />
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
-            <div className="live-badge">Live Demo</div>
+            <div className="live-badge" aria-live="polite">Live Demo</div>
           </div>
 
           {/* Action Buttons */}
           <motion.div
             className="demo-buttons"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <Button>
+            <Button aria-label="Watch full demo">
               <Play />
               Watch Full Demo
             </Button>
-            <Button>
+            <Button aria-label="Try live dashboard">
               <ExternalLink />
               Try Live Dashboard
             </Button>
@@ -77,33 +114,24 @@ export default function ProductDemo() {
         {/* Feature Highlights */}
         <motion.div
           className="feature-grid"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="feature-card">
-            <h3>Real-time Analytics</h3>
-            <p>
-              Monitor storage usage, user activity, and system performance in
-              real-time.
-            </p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Intuitive Interface</h3>
-            <p>
-              Designed with NGO workflows in mind for maximum productivity and
-              ease of use.
-            </p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Collaborative Tools</h3>
-            <p>
-              Built-in sharing, permissions, and team management features.
-            </p>
-          </div>
+          <FeatureCard
+            title="Real-time Analytics"
+            description="Monitor storage usage, user activity, and system performance in real-time."
+          />
+          <FeatureCard
+            title="Intuitive Interface"
+            description="Designed with NGO workflows in mind for maximum productivity and ease of use."
+          />
+          <FeatureCard
+            title="Collaborative Tools"
+            description="Built-in sharing, permissions, and team management features."
+          />
         </motion.div>
       </div>
     </section>
