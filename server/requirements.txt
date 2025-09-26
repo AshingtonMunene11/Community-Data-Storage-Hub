@@ -16,4 +16,7 @@ SQLAlchemy==2.0.43
 typing_extensions==4.13.2
 Werkzeug==3.0.6
 zipp==3.20.2
-PyJWT
+PyJWT==2.9.0
+Flask-Migrate==4.1.0
+marshmallow-sqlalchemy==1.1.1
+Faker

@@ -1,4 +1,4 @@
-#!/home/mike--muteithia/Dev/code/final-phase-projects/p4-CSCH/Community-Data-Storage-Hub/server/venv/bin/python3
+#!/home/mike--muteithia/Dev/code/final-phase-projects/p4-CSCH/Community-Data-Storage-Hub/server/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
