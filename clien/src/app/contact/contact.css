@@ -1,0 +1,136 @@
+.contact-section {
+  background-color: #0A0F1F;
+  color: white;
+  padding: 3rem 1rem; /* reduced padding */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  margin-bottom: 2rem; /* reduced margin */
+}
+
+.contact-header h2 {
+  font-size: 2rem; /* smaller font */
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.contact-header p {
+  font-size: 1rem; /* slightly smaller */
+  color: #d1d5db;
+  max-width: 600px; /* narrower */
+  margin: 0 auto;
+}
+
+/* Layout */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; /* smaller gap */
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Card */
+.contact-form {
+  background-color: #1f2937;
+  padding: 1.5rem; /* reduced padding */
+  border-radius: 0.5rem;
+}
+
+.contact-form h3 {
+  font-size: 1.25rem; /* smaller header */
+  font-weight: 600;
+  margin-bottom: 1rem; /* smaller margin */
+}
+
+.contact-form label {
+  display: block;
+  font-size: 0.75rem; /* smaller label */
+  margin-bottom: 0.4rem;
+  color: #d1d5db;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 0.5rem; /* smaller padding */
+  border-radius: 0.25rem;
+  border: 1px solid #374151;
+  background-color: #111827;
+  color: white;
+  margin-bottom: 0.75rem; /* tighter spacing */
+}
+
+.contact-form textarea {
+  min-height: 100px; /* slightly shorter */
+}
+
+.contact-form .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.contact-form button {
+  background-color: #14b8a6;
+  color: white;
+  padding: 0.5rem 1rem; /* smaller button */
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #0d9488;
+}
+
+/* Container for right-hand sidebar */
+.contact-right {
+  display: grid;
+  grid-template-columns: 1fr; /* default single column */
+  gap: 1rem; /* spacing between boxes */
+}
+
+/* For wider screens, 2 columns */
+@media (min-width: 1024px) {
+  .contact-right {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Compact cards */
+.info-card, .reason-card {
+  background-color: #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.info-card h4, .reason-card h4 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.info-card p, .reason-card p {
+  font-size: 0.8rem;
+  margin: 0.2rem 0 0 0;
+}
+
+.icon {
+  color: #14b8a6;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
