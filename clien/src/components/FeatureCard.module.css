@@ -1,6 +1,6 @@
 .section {
   padding: 4rem 1rem;
-  background-color: #f5f5f5; /* dark background if desired */
+  background-color: #f5f5f5;
 }
 
 .container {
@@ -13,10 +13,20 @@
 
 .cardWrapper {
   transition: transform 0.3s ease;
+  outline: none;
+}
+
+.cardWrapper:focus {
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.6);
+  transform: scale(1.03);
+}
+
+.cardWrapper:hover {
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.4);
 }
 
 .card {
-  background-color: #1f2937; /* dark gray */
+  background-color: #1f2937;
   color: white;
   padding: 1.5rem;
   border-radius: 0.5rem;
@@ -36,13 +46,18 @@
 }
 
 .iconWrapper {
-  font-size: 1.75rem;
-  color: #14b8a6; /* teal accent */
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
   width: 1.75rem;
   height: 1.75rem;
+  color: #14b8a6;
 }
 
 .title {
@@ -56,4 +71,22 @@
   color: #d1d5db;
   line-height: 1.5;
   margin: 0;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
 }
