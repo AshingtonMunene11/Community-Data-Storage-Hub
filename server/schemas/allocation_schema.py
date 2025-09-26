@@ -1,5 +1,5 @@
-from ..models.allocation import Allocation
-from ..extensions import ma
+from models.allocation import Allocation
+from extensions import ma
 from marshmallow import fields
 # from ..schemas.upload_schema import UploadSchema
 # from ..schemas.storage_node_schema import StorageNodeSchema

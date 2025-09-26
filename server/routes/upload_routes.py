@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from ..extensions import db
-from ..models.upload import Upload
-from ..schemas.upload_schema import UploadSchema
+from extensions import db
+from models.upload import Upload
+from schemas.upload_schema import UploadSchema
 from marshmallow import ValidationError
 
 upload_bp = Blueprint('upload_bp', __name__)

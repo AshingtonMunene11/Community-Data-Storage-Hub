@@ -1,5 +1,5 @@
-from ..models.storage_node import StorageNode
-from ..extensions import ma
+from models.storage_node import StorageNode
+from extensions import ma
 from marshmallow import fields
 
 class StorageNodeSchema(ma.SQLAlchemySchema):

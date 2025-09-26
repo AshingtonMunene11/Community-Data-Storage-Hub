@@ -1,4 +1,4 @@
-from ..extensions import db
+from extensions import db
 
 class StorageNode(db.Model):
     __tablename__ = 'storage_nodes'
