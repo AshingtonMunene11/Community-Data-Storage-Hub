@@ -69,48 +69,9 @@ export default function ProductDemo() {
               className="rounded"
               priority
             />
-
-            <motion.div
-              className="play-overlay"
-              role="button"
-              aria-label="Play demo video"
-              tabIndex={0}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  // trigger video logic
-                }
-              }}
-            >
-              <div className="play-button">
-                <Play />
-              </div>
+            </div>
             </motion.div>
-
-            <div className="live-badge" aria-live="polite">Live Demo</div>
-          </div>
-
-          {/* Action Buttons */}
-          <motion.div
-            className="demo-buttons"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <Button aria-label="Watch full demo">
-              <Play />
-              Watch Full Demo
-            </Button>
-            <Button aria-label="Try live dashboard">
-              <ExternalLink />
-              Try Live Dashboard
-            </Button>
-          </motion.div>
-        </motion.div>
-
+            
         {/* Feature Highlights */}
         <motion.div
           className="feature-grid"

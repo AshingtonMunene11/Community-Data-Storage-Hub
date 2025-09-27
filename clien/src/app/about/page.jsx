@@ -31,7 +31,6 @@ const About = () => {
 
   return (
     <div className="about-root">
-      {/* Hero Section */}
      <section className="change-makers-section">
      <div className="section-header">
     <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
@@ -64,7 +63,6 @@ const About = () => {
     </div>
   </section>
 
-      {/* Mission & Vision */}
      <section className="mission-impact-section">
   <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} className="mission-vision-group">
     <div className="mission-box">
@@ -108,7 +106,6 @@ const About = () => {
   </motion.div>
 </section>
 
-      {/* Values Section */}
       <section className="values-section">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} className="values-header">
           <h3>Our Values</h3>
@@ -133,7 +130,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
       <section className="team-section">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} className="team-header">
           <h3>Meet Our Team</h3>
@@ -155,7 +151,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Timeline Section */}
       <section className="journey-section">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} className="timeline-header">
           <h3>Our Journey</h3>

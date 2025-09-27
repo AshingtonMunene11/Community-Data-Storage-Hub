@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import './globals.css';
-import { AppProvider } from '@/context/AppContext'; // Adjust path if needed
+import { AppProvider } from '@/context/AppContext'; 
 
 export default function RootLayout({ children }) {
   return (

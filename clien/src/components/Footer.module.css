@@ -1,21 +1,21 @@
 .footer {
-  background-color: #D1D5DB; /* deep navy */
+  background-color: #D1D5DB; 
   color: #D1D5DB;
-  padding: 1rem 1rem; /* reduced padding */
+  padding: 1rem 1rem; 
   font-family: 'Inter', sans-serif;
 }
 
 .footerTop {
   display: grid;
-  gap: 0.5rem; /* reduced gap */
+  gap: 0.5rem; 
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  margin-bottom: 1rem; /* reduced margin */
+  margin-bottom: 1rem; 
 }
 
 .footerLogo {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* reduced gap */
+  gap: 0.5rem; 
 }
 
 .logoText {
@@ -26,14 +26,14 @@
 }
 
 .tagline {
-  font-size: 0.85rem; /* slightly smaller */
+  font-size: 0.85rem;
   color: #d1d5db;
 }
 
 .footerSocial {
   display: flex;
-  gap: 0.5rem; /* reduced gap */
-  margin-top: 0.5rem; /* reduced margin */
+  gap: 0.5rem; 
+  margin-top: 0.5rem; 
 }
 
 .socialIcon {
@@ -49,7 +49,7 @@
 
 .sectionTitle {
   font-weight: 500;
-  margin-bottom: 0.5rem; /* reduced margin */
+  margin-bottom: 0.5rem; 
   color: #ffffff;
   font-size: 0.9rem;
 }
@@ -64,8 +64,8 @@
   display: block;
   color: #d1d5db;
   text-decoration: none;
-  font-size: 0.825rem; /* slightly smaller */
-  padding: 0.2rem 0; /* reduced padding */
+  font-size: 0.825rem; 
+  padding: 0.2rem 0; 
   transition: color 0.2s ease;
 }
 
@@ -75,8 +75,8 @@
 
 .footerBottom {
   border-top: 1px solid #1F2937;
-  padding-top: 0.75rem; /* reduced padding */
-  font-size: 0.7rem; /* smaller text */
+  padding-top: 0.75rem; 
+  font-size: 0.7rem; 
   color: #9ca3af;
   text-align: center;
 }
