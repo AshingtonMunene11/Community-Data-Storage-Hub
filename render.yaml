@@ -2,11 +2,12 @@ services:
   - type: web
     name: community-data-storage-hub-api
     env: python
-    pythonVersion: 3.11.9
+    runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT wsgi:application
+    buildCommand: chmod +x build.sh start.sh deploy.py && ./build.sh
+    startCommand: ./start.sh
     autoDeploy: true
+    healthCheckPath: /
     envVars:
       - key: SECRET_KEY
         generateValue: true
@@ -16,6 +17,8 @@ services:
         fromDatabase:
           name: community-db
           property: connectionString
+      - key: PORT
+        value: 10000
 
 databases:
   - name: community-db
