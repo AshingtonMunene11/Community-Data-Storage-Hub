@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from extensions import db
-from models.storage_node import StorageNode
-from schemas.storage_node_schema import StorageNodeSchema
+from server.extensions import db
+from server.models.storage_node import StorageNode
+from server.schemas.storage_node_schema import StorageNodeSchema
 from marshmallow import ValidationError
 
 storage_nodes_bp = Blueprint("storage_nodes", __name__)

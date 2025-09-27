@@ -20,5 +20,5 @@ def create_app():
 
 app = create_app()
 
-# 👇 Add this to expose db for CLI
+
 from .extensions import db

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
-from extensions import db
-from models.user import User
-from schemas.user_schema import UserSchema
+from server.extensions import db
+from server.models.user import User
+from server.schemas.user_schema import UserSchema
 import jwt
 from datetime import datetime, timedelta
 

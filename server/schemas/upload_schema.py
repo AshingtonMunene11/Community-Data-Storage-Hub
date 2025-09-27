@@ -1,8 +1,8 @@
 from marshmallow import fields
-from extensions import ma
-from models.upload import Upload
-# from schemas.allocation_schema import AllocationSchema
-from schemas.user_schema import UserSchema
+from server.extensions import ma
+from server.models.upload import Upload
+# from server.schemas.allocation_schema import AllocationSchema
+from server.schemas.user_schema import UserSchema
 
 
 class UploadSchema(ma.SQLAlchemySchema):
