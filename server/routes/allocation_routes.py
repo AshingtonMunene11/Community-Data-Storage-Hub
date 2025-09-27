@@ -10,7 +10,7 @@ allocation_bp = Blueprint('allocation_bp', __name__)
 allocation_schema = AllocationSchema()
 allocations_schema = AllocationSchema(many=True)
 
-@allocation_bp.route('/allocations', methods=['POST'])
+@allocation_bp.route('/', methods=['POST'])
 def create_allocation():
     data = request.get_json()
     try:
@@ -30,17 +30,17 @@ def create_allocation():
     return allocation_schema.dump(allocation), 201
 
 
-@allocation_bp.route('/allocations', methods=['GET'])
+@allocation_bp.route('/', methods=['GET'])
 def get_allocations():
     allocations = Allocation.query.all()
     return allocations_schema.dump(allocations), 200
 
-@allocation_bp.route('/allocations/<int:id>', methods=['GET'])
+@allocation_bp.route('/<int:id>', methods=['GET'])
 def get_allocation(id):
     allocation = Allocation.query.get_or_404(id)
     return allocation_schema.dump(allocation), 200
 
-@allocation_bp.route('/allocations/<int:id>', methods=['PUT'])
+@allocation_bp.route('/<int:id>', methods=['PUT'])
 def update_allocations(id):
     allocation = Allocation.query.get_or_404(id)
     data = request.get_json()
@@ -59,14 +59,11 @@ def update_allocations(id):
 
     if used + size > node.capacity:
         return jsonify({"error": "Node capacity exceeded"}), 400
-    
-    for key, value in validated.items():
-        setattr(allocation, key, value)
 
     db.session.commit()
     return allocation_schema.dump(updated_allocation), 200
 
-@allocation_bp.route('/allocations/<int:id>', methods=['DELETE'])
+@allocation_bp.route('/<int:id>', methods=['DELETE'])
 def delete_allocation(id):
     allocation = Allocation.query.get_or_404(id)
     db.session.delete(allocation)

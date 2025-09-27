@@ -42,15 +42,12 @@ def update_upload(id):
     data = request.get_json()
 
     try:
-        validated = upload_schema.load(data, partial=True)
+        updated_upload = upload_schema.load(data, instance=upload, partial=True)
     except ValidationError as err:
         return jsonify(err.messages), 400
-    
-    for key, value in validated.items():
-        setattr(upload, key, value)
 
     db.session.commit()
-    return upload_schema.dump(upload), 200
+    return upload_schema.dump(updated_upload), 200
 
 @upload_bp.route('/uploads/<int:id>', methods=['DELETE'])
 def delete_upload(id):
