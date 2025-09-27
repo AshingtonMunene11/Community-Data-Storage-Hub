@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r server/requirements.txt
-    startCommand: gunicorn app:app --chdir server --bind 0.0.0.0:$PORT
+    startCommand: bash -lc 'cd server && flask --app app db upgrade && gunicorn app:app --bind 0.0.0.0:$PORT'
     autoDeploy: true
     envVars:
       - key: SECRET_KEY
@@ -15,7 +15,6 @@ services:
         fromDatabase:
           name: community-db
           property: connectionString
-    preDeployCommand: bash -lc 'cd server && flask --app app db upgrade'
 
 databases:
   - name: community-db
