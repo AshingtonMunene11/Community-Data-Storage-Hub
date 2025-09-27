@@ -5,11 +5,10 @@
   line-height: 1.6;
 }
 
-/* ================= Hero Section ================= */
 .change-makers-section {
   background-color: #0A0F1F;
   color: white;
-  padding: 3rem 1.5rem; /* Reduced vertical padding */
+  padding: 3rem 1.5rem;
 }
 
 .section-header {
@@ -17,7 +16,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem; /* Tighter spacing between text and image */
+  gap: 1.25rem; 
   align-items: center;
 }
 
@@ -69,7 +68,6 @@ img.rounded-2xl {
   margin: 0 auto;
 }
 
-/* ================= Mission & Vision ================= */
 .mission-impact-section {
   display: grid;
   grid-template-columns: 1fr;
@@ -151,7 +149,6 @@ img.rounded-2xl {
   font-size: 1rem;
 }
 
-/* ================= Values Section ================= */
 .values-section {
   text-align: center;
   padding: 1.5rem 1.5rem;
@@ -193,7 +190,6 @@ img.rounded-2xl {
   color: #f1f1f1;
 }
 
-/* ================= Team Section ================= */
 .team-section {
   text-align: center;
   padding: 3.5rem 1.5rem;
@@ -246,7 +242,6 @@ img.rounded-2xl {
   color: white;
 }
 
-/* ================= Timeline Section ================= */
 .journey-section {
   text-align: center;
   padding: 0.5rem 1.5rem;
