@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Database Initialization Script for Community Data Storage Hub
 
@@ -9,7 +8,6 @@ sample data for testing.
 import os
 import sys
 
-# Add the project root to Python path
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
 
@@ -24,17 +22,14 @@ def init_database():
     app = create_app()
     
     with app.app_context():
-        print("🗄️  Initializing database...")
+        print("Initializing database...")
         
-        # Drop all existing tables
         db.drop_all()
         print("✓ Dropped existing tables")
         
-        # Create all tables
         db.create_all()
         print("✓ Created all tables")
         
-        # Create sample users
         users_data = [
             {
                 'username': 'admin',
@@ -60,29 +55,28 @@ def init_database():
                 email=user_data['email'],
                 role=user_data['role']
             )
-            user.set_password('password123')  # Default password for testing
+            user.set_password('password123')
             db.session.add(user)
             created_users.append(user)
         
-        # Create sample storage nodes
         storage_nodes_data = [
             {
                 'name': 'Node-East-1',
                 'location': 'East Coast Data Center',
-                'capacity': 1000000,  # 1TB in MB
-                'used': 250000       # 250GB used
+                'capacity': 1000000,
+                'used': 250000   
             },
             {
                 'name': 'Node-West-1',
                 'location': 'West Coast Data Center',
-                'capacity': 2000000,  # 2TB in MB
-                'used': 500000       # 500GB used
+                'capacity': 2000000,
+                'used': 500000    
             },
             {
                 'name': 'Node-Central-1',
                 'location': 'Central Data Center',
-                'capacity': 1500000,  # 1.5TB in MB
-                'used': 100000       # 100GB used
+                'capacity': 1500000, 
+                'used': 100000  
             }
         ]
         
@@ -92,25 +86,23 @@ def init_database():
             db.session.add(storage_node)
             created_storage_nodes.append(storage_node)
         
-        # Commit users and storage nodes first
         db.session.commit()
         print("✓ Created sample users and storage nodes")
         
-        # Create sample uploads
         uploads_data = [
             {
                 'filename': 'document1.pdf',
-                'size': 2.5,  # 2.5 MB
+                'size': 2.5,
                 'user_id': created_users[1].id
             },
             {
                 'filename': 'image1.jpg',
-                'size': 1.2,  # 1.2 MB
+                'size': 1.2,
                 'user_id': created_users[1].id
             },
             {
                 'filename': 'video1.mp4',
-                'size': 150.0,  # 150 MB
+                'size': 150.0, 
                 'user_id': created_users[2].id
             }
         ]
@@ -121,11 +113,9 @@ def init_database():
             db.session.add(upload)
             created_uploads.append(upload)
         
-        # Commit uploads
         db.session.commit()
         print("✓ Created sample uploads")
-        
-        # Create sample allocations
+    
         allocations_data = [
             {
                 'upload_id': created_uploads[0].id,
@@ -153,7 +143,6 @@ def init_database():
             allocation = Allocation(**allocation_data)
             db.session.add(allocation)
         
-        # Final commit
         db.session.commit()
         print("✓ Created sample allocations")
         
@@ -161,11 +150,11 @@ def init_database():
         print("\n" + "="*50)
         print("🎉 Database initialized successfully!")
         print("="*50)
-        print(f"👥 Users created: {len(created_users)}")
-        print(f"🗄️  Storage nodes created: {len(created_storage_nodes)}")
-        print(f"📁 Uploads created: {len(created_uploads)}")
-        print(f"🔗 Allocations created: {len(allocations_data)}")
-        print("\n📝 Test credentials:")
+        print(f"Users created: {len(created_users)}")
+        print(f"Storage nodes created: {len(created_storage_nodes)}")
+        print(f"Uploads created: {len(created_uploads)}")
+        print(f"Allocations created: {len(allocations_data)}")
+        print("\nTest credentials:")
         for user in created_users:
             print(f"   • {user.username} ({user.role}): password123")
         print("="*50)
