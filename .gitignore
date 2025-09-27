@@ -1,6 +1,6 @@
 # Virtual environments
 server/venv/
-serveR/venv/
+app/venv/
 venv/
 env/
 

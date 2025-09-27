@@ -26,7 +26,8 @@ def main():
         try:
             engine = create_engine(url)
             with engine.connect() as conn:
-                conn.execute("SELECT 1")
+                # SQLAlchemy 2.0: use exec_driver_sql to run raw SQL
+                conn.exec_driver_sql("SELECT 1")
             print("Database is ready.")
             return 0
         except Exception as e:

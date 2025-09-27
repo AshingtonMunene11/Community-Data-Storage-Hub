@@ -6,7 +6,7 @@ from server.routes.storage_nodes_bp import storage_nodes_bp
 from server.routes.upload_routes import upload_bp
 from server.routes.allocation_routes import allocation_bp
 from server import config
-from server.models import user, upload, allocation, storage_node  
+from server.models import user, upload, allocation, storage_node
 
 def create_app():
     app = Flask(__name__)
