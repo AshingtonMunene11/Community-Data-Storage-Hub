@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from extensions import db, ma, migrate
+from .extensions import db, ma, migrate
 from routes.users import users_bp
 from routes.storage_nodes_bp import storage_nodes_bp
 from routes.upload_routes import upload_bp
