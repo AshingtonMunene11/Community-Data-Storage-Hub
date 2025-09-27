@@ -1,5 +1,5 @@
 .footer {
-  background-color: #5e98df; /* deep navy */
+  background-color: #D1D5DB; /* deep navy */
   color: #D1D5DB;
   padding: 1rem 1rem; /* reduced padding */
   font-family: 'Inter', sans-serif;
@@ -21,7 +21,7 @@
 .logoText {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #14b8a6;
+  color: #141fb8;
   text-decoration: none;
 }
 

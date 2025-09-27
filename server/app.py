@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
-from .extensions import db, ma, migrate
-from .routes.users import users_bp
-from .routes.storage_nodes_bp import storage_nodes_bp
-from .routes.upload_routes import upload_bp
-from .routes.allocation_routes import allocation_bp
-from . import config
+from extensions import db, ma, migrate
+from routes.users import users_bp
+from routes.storage_nodes_bp import storage_nodes_bp
+from routes.upload_routes import upload_bp
+from routes.allocation_routes import allocation_bp
+import config
 
 def create_app():
     app = Flask(__name__)
@@ -26,11 +26,27 @@ def create_app():
     migrate.init_app(app, db)
 
     with app.app_context():
+        # Import models so that they are registered with SQLAlchemy for migrations
+        from models import user, upload, allocation, storage_node  # noqa: F401
         # Register blueprints
         app.register_blueprint(users_bp, url_prefix="/api/users")
         app.register_blueprint(storage_nodes_bp, url_prefix="/api/storage-nodes")
         app.register_blueprint(upload_bp, url_prefix="/api")
         app.register_blueprint(allocation_bp, url_prefix="/api/allocations")
+
+    # Root health/info endpoint
+    @app.route("/")
+    def root():
+        return jsonify({
+            "status": "ok",
+            "name": "Community Data Storage Hub API",
+            "endpoints": [
+                "/api/users/",
+                "/api/storage-nodes/",
+                "/api/uploads",
+                "/api/allocations"
+            ]
+        }), 200
 
     return app
 

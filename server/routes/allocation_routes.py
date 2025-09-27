@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
-from ..extensions import db
-from ..models.allocation import Allocation
+from extensions import db
+from models.allocation import Allocation
 from marshmallow import ValidationError
-from ..models.storage_node import StorageNode
-from ..schemas.allocation_schema import AllocationSchema
+from models.storage_node import StorageNode
+from schemas.allocation_schema import AllocationSchema
 #from server.models.schemas.allocation_schema import AllocationSchema
 
 allocation_bp = Blueprint('allocation_bp', __name__)

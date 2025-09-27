@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import './globals.css'; // Make sure this path matches your project
+import './globals.css';
+import { AppProvider } from '@/context/AppContext'; // Adjust path if needed
 
 export default function RootLayout({ children }) {
   return (
@@ -11,11 +12,13 @@ export default function RootLayout({ children }) {
         <title>Community Data Storage Hub</title>
       </head>
       <body className="bg-background text-foreground font-sans">
-        <div className="page-wrapper">
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </div>
+        <AppProvider>
+          <div className="page-wrapper">
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </div>
+        </AppProvider>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
-from ..extensions import db
-from ..models.user import User
-from ..schemas.user_schema import UserSchema
+from extensions import db
+from models.user import User
+from schemas.user_schema import UserSchema
 import jwt
 from datetime import datetime, timedelta
 
@@ -109,6 +109,28 @@ def update_user(user_id):
     db.session.commit()
     return jsonify(user_schema.dump(user))
 
+
+@users_bp.route("/<int:user_id>", methods=["PATCH"])
+def patch_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+    
+    data = request.get_json() or {}
+    if "email" in data and data.get("email"):
+        # Checks if the new email already exists
+        if User.query.filter(User.email == data["email"], User.id != user.id).first():
+            return jsonify({"error": "Email already exists"}), 400
+        user.email = data["email"]
+    if "username" in data and data.get("username"):
+        user.username = data["username"]
+    if "role" in data and data.get("role"):
+        user.role = data["role"]
+    if "password" in data and data.get("password"):
+        user.set_password(data["password"]) 
+
+    db.session.commit()
+    return jsonify(user_schema.dump(user)), 200
 
 # DELETE: delete a user by ID
 @users_bp.route("/<int:user_id>", methods=["DELETE"])

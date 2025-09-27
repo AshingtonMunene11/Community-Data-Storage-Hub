@@ -1,6 +1,6 @@
 from datetime import datetime
-from ..extensions import db
-from ..models.user import User
+from extensions import db
+from models.user import User
 
 class Upload(db.Model):
     __tablename__ = 'uploads'
