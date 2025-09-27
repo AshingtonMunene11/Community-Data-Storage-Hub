@@ -1,10 +1,10 @@
-# 🚀 Deployment Guide
+#  Deployment Guide
 
 ## Automated Deployment Files
 
 This repository includes several files that automate the deployment process:
 
-### 📁 Deployment Files
+### Deployment Files
 
 | File | Purpose |
 |------|---------|
@@ -35,7 +35,7 @@ This repository includes several files that automate the deployment process:
    - Starts Gunicorn with optimized settings
    - Configures logging and monitoring
 
-### 🌐 Render.com Deployment
+### Render.com Deployment
 
 #### Quick Deploy
 1. Fork/clone this repository
@@ -52,7 +52,7 @@ Start Command: ./start.sh
 Environment: Python 3.10.12
 ```
 
-### 🐳 Docker Deployment
+###  Docker Deployment
 
 ```bash
 # Build the image
@@ -65,22 +65,22 @@ docker run -p 8000:8000 \
   community-data-storage-hub
 ```
 
-### 🔍 Health Checks
+### Health Checks
 
 The application includes built-in health checks:
 - **Health endpoint**: `GET /`
 - **Debug endpoint**: `GET /debug`
 - **API status**: Returns database counts and system info
 
-### 🗄️ Database Setup
+### Database Setup
 
 The deployment automatically:
-- ✅ Creates all database tables
-- ✅ Sets up relationships and indexes
-- ✅ Creates initial admin user (if database is empty)
-- ✅ Handles PostgreSQL URL conversion for SQLAlchemy
+-  Creates all database tables
+-  Sets up relationships and indexes
+-  Creates initial admin user (if database is empty)
+-  Handles PostgreSQL URL conversion for SQLAlchemy
 
-### 🔐 Environment Variables
+### Environment Variables
 
 Required for production:
 ```
@@ -89,7 +89,7 @@ DATABASE_URL=postgresql://user:pass@host:port/db
 FLASK_ENV=production
 ```
 
-### 📊 Monitoring
+### Monitoring
 
 The application includes:
 - Request logging via Gunicorn
@@ -97,7 +97,7 @@ The application includes:
 - Database connection monitoring
 - Health check endpoints
 
-### 🚨 Troubleshooting
+### Troubleshooting
 
 Common issues and solutions:
 
@@ -113,7 +113,7 @@ Common issues and solutions:
    - Verify all dependencies in `requirements.txt`
    - Check Python path configuration
 
-### 📈 Performance Optimization
+### Performance Optimization
 
 The deployment includes:
 - Multi-worker Gunicorn setup
@@ -122,7 +122,7 @@ The deployment includes:
 - Memory optimization
 - Static file serving
 
-### 🔄 Auto-deployment
+### Auto-deployment
 
 Configured for automatic deployment on:
 - Push to main branch
@@ -131,6 +131,6 @@ Configured for automatic deployment on:
 
 ---
 
-## 🎉 Ready to Deploy!
+## Ready to Deploy!
 
 Your Flask API is now fully automated for deployment. Just push to your repository and let the automation handle the rest!
