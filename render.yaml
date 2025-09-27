@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: community-data-storage-hub-api
+    env: python
+    plan: free
+    buildCommand: pip install -r server/requirements.txt
+    startCommand: gunicorn app:app --chdir server --bind 0.0.0.0:$PORT
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: FLASK_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: community-db
+          property: connectionString
+    preDeployCommand: bash -lc 'cd server && flask --app app db upgrade'
+
+databases:
+  - name: community-db
+    plan: free
