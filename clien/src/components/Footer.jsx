@@ -11,26 +11,18 @@ const footerLinks = {
   Platform: [
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Features', href: '/#features' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'Security', href: '/security' },
   ],
   Company: [
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Press', href: '/press' },
   ],
   Resources: [
     { name: 'Documentation', href: '/docs' },
     { name: 'API Reference', href: '/api' },
-    { name: 'Community', href: '/community' },
-    { name: 'Blog', href: '/blog' },
   ],
   Legal: [
     { name: 'Privacy Policy', href: '/privacy' },
     { name: 'Terms of Service', href: '/terms' },
-    { name: 'Cookie Policy', href: '/cookies' },
-    { name: 'GDPR', href: '/gdpr' },
   ],
 };
 
