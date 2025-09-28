@@ -21,7 +21,7 @@ export default function UsersPage() {
   });
 
   const loginSchema = Yup.object({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    username: Yup.string().required("Username is required"),
     password: Yup.string().required("Password is required"),
   });
 
@@ -125,16 +125,16 @@ export default function UsersPage() {
       {/* Login Form */}
       {mode === "login" && (
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ username: "", password: "" }}
           validationSchema={loginSchema}
           onSubmit={handleLogin}
         >
           {({ isSubmitting }) => (
             <Form className="space-y-4 bg-white p-4 rounded shadow">
               <div>
-                <label className="block text-sm font-medium">Email</label>
-                <Field type="email" name="email" className="w-full border px-3 py-2 rounded" />
-                <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
+                <label className="block text-sm font-medium">Username</label>
+                <Field type="text" name="username" className="w-full border px-3 py-2 rounded" />
+                <ErrorMessage name="username" component="div" className="text-red-500 text-sm" />
               </div>
               <div>
                 <label className="block text-sm font-medium">Password</label>

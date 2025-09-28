@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from flask import Blueprint, request, jsonify, session, make_response
+from flask import Blueprint, request, jsonify, session, make_response, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
 
 from server.extensions import db
 from server.models import User
@@ -60,6 +61,13 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
 
+    # Generate JWT token
+    token = jwt.encode(
+        {"user_id": new_user.id, "username": new_user.username, "role": new_user.role},
+        current_app.config["SECRET_KEY"],
+        algorithm="HS256"
+    )
+
     # store session info
     session.update({
         "user_id": new_user.id,
@@ -68,7 +76,13 @@ def create_user():
     })
 
     resp = make_response(
-        jsonify({"message": "User created and logged in", "user": _user_to_dict(new_user)}),
+        jsonify({
+            "message": "User created and logged in", 
+            "token": token,
+            "username": new_user.username,
+            "role": new_user.role,
+            "user": _user_to_dict(new_user)
+        }),
         201,
     )
     resp.set_cookie("username", new_user.username, httponly=True, samesite="Lax")
@@ -89,6 +103,13 @@ def login_user():
     if not user or not check_password_hash(user.password_hash, password):
         return jsonify({"error": "Invalid username or password"}), 401
 
+    # Generate JWT token
+    token = jwt.encode(
+        {"user_id": user.id, "username": user.username, "role": user.role},
+        current_app.config["SECRET_KEY"],
+        algorithm="HS256"
+    )
+
     session.update({
         "user_id": user.id,
         "username": user.username,
@@ -96,7 +117,13 @@ def login_user():
     })
 
     resp = make_response(
-        jsonify({"message": "Login successful", "user": _user_to_dict(user)}),
+        jsonify({
+            "message": "Login successful", 
+            "token": token,
+            "username": user.username,
+            "role": user.role,
+            "user": _user_to_dict(user)
+        }),
         200,
     )
     resp.set_cookie("username", user.username, httponly=True, samesite="Lax")
