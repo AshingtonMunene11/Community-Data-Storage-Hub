@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from .extensions import db, ma, migrate
+from extensions import db, ma, migrate
 from .config import Config
 
 from server.routes.users import users_bp
