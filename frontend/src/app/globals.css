@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F8F8F8;
+  --foreground: #333333;
 }
 
 @theme inline {
@@ -23,4 +23,101 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Override Tailwind colors to match the design */
+.bg-gray-50 {
+  background-color: #F8F8F8 !important;
+}
+
+.bg-white {
+  background-color: #F8F8F8 !important;
+}
+
+.text-gray-900 {
+  color: #333333 !important;
+}
+
+.text-gray-500 {
+  color: #888888 !important;
+}
+
+.text-gray-600 {
+  color: #666666 !important;
+}
+
+.border-gray-200 {
+  border-color: #EEEEEE !important;
+}
+
+.bg-gray-100 {
+  background-color: #F5F5F5 !important;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #F5F5F5 !important;
+}
+
+/* Sidebar styling */
+.w-64 {
+  background-color: #222222 !important;
+  color: #ffffff !important;
+}
+
+.w-64 .text-xl {
+  color: #ffffff !important;
+}
+
+.w-64 .border-b {
+  border-color: #333333 !important;
+}
+
+.w-64 a {
+  color: #ffffff !important;
+}
+
+.w-64 a:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Chart colors */
+.text-blue-600 {
+  color: #333333 !important;
+}
+
+.text-green-600 {
+  color: #4CAF50 !important;
+}
+
+.text-purple-600 {
+  color: #333333 !important;
+}
+
+.text-orange-600 {
+  color: #333333 !important;
+}
+
+/* Status badges */
+.bg-red-100 {
+  background-color: #FFEBEE !important;
+}
+
+.text-red-800 {
+  color: #F44336 !important;
+}
+
+.bg-yellow-100 {
+  background-color: #FFF3E0 !important;
+}
+
+.text-yellow-800 {
+  color: #FF9800 !important;
+}
+
+.bg-green-100 {
+  background-color: #E6F7E6 !important;
+}
+
+.text-green-800 {
+  color: #4CAF50 !important;
 }
