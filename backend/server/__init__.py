@@ -17,9 +17,14 @@ def create_app():
     allowed_origins = [
         "http://localhost:3000",  # Local development
         app.config.get("FRONTEND_URL", "http://localhost:3000"),  # From environment
-        "https://community-data-storage-hub.vercel.app/"  # Allow any Vercel deployment
+        "https://community-data-storage-hub.vercel.app",  # Your deployed frontend (no trailing slash)
+        "https://*.vercel.app"  # Allow any Vercel deployment
     ]
-    CORS(app, origins=allowed_origins)
+    CORS(app, 
+         origins=allowed_origins,
+         methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+         allow_headers=['Content-Type', 'Authorization'],
+         supports_credentials=True)
 
     db.init_app(app)
     ma.init_app(app)
