@@ -10,6 +10,14 @@ from server.models import User
 users_bp = Blueprint("users_bp", __name__)
 
 # ----------------------------------------------------------------------
+# Health Check
+# ----------------------------------------------------------------------
+@users_bp.route("/health", methods=["GET"])
+def health_check():
+    """Simple health check endpoint."""
+    return jsonify({"status": "healthy", "message": "Users API is working"}), 200
+
+# ----------------------------------------------------------------------
 # Helpers
 # ----------------------------------------------------------------------
 def _user_to_dict(u: User) -> dict:
@@ -36,30 +44,37 @@ def list_users():
 @users_bp.route("/", methods=["POST"])
 def create_user():
     """Register a new user and log them in."""
-    data = request.get_json(silent=True) or {}
+    try:
+        data = request.get_json(silent=True) or {}
+        print(f"Received signup data: {data}")  # Debug log
 
-    username = data.get("username", "").strip()
-    email    = data.get("email", "").strip()
-    password = data.get("password")
-    role     = data.get("role", "user")
+        username = data.get("username", "").strip()
+        email    = data.get("email", "").strip()
+        password = data.get("password")
+        role     = data.get("role", "user")
 
-    if not username or not email or not password:
-        return jsonify({"error": "username, email and password are required"}), 400
+        if not username or not email or not password:
+            return jsonify({"error": "username, email and password are required"}), 400
 
-    if User.query.filter_by(username=username).first():
-        return jsonify({"error": "Username already taken"}), 400
-    if User.query.filter_by(email=email).first():
-        return jsonify({"error": "Email already registered"}), 400
+        if User.query.filter_by(username=username).first():
+            return jsonify({"error": "Username already taken"}), 400
+        if User.query.filter_by(email=email).first():
+            return jsonify({"error": "Email already registered"}), 400
 
-    new_user = User(
-        username=username,
-        email=email,
-        password_hash=generate_password_hash(password),
-        role=role,
-        created_at=datetime.utcnow(),
-    )
-    db.session.add(new_user)
-    db.session.commit()
+        new_user = User(
+            username=username,
+            email=email,
+            password_hash=generate_password_hash(password),
+            role=role,
+            created_at=datetime.utcnow(),
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        print(f"User created successfully: {username}")  # Debug log
+    except Exception as e:
+        print(f"Error creating user: {str(e)}")  # Debug log
+        db.session.rollback()
+        return jsonify({"error": f"Failed to create user: {str(e)}"}), 500
 
     # Generate JWT token
     token = jwt.encode(

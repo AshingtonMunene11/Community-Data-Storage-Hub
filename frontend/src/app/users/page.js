@@ -29,7 +29,7 @@ export default function UsersPage() {
   const handleSignup = async (values, { resetForm }) => {
     try {
       const { confirmPassword, ...payload } = values; // omit confirmPassword
-      await api.post("/users/", payload);
+      await api.post("/users", payload);
       toast.success("Account created! You can now log in.");
       resetForm();
       setMode("login");
