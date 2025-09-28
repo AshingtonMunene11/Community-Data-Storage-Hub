@@ -10,12 +10,12 @@ class User(db.Model):
     role = db.Column(db.String(50), default='user')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Passoword helpers
+    # Password helpers
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def _repr_(self):
+    def __repr__(self):
         return f"<User {self.username}>"

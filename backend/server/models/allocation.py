@@ -1,7 +1,7 @@
 from server.extensions import db
 
 class Allocation(db.Model):
-    _tablename_ = 'allocations'
+    __tablename__ = 'allocations'
 
     id = db.Column(db.Integer, primary_key=True)
     upload_id = db.Column(db.Integer, db.ForeignKey('uploads.id'), nullable=False)

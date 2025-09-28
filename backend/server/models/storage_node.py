@@ -1,7 +1,7 @@
 from server.extensions import db
 
 class StorageNode(db.Model):
-    _tablename_ = 'storage_nodes'
+    __tablename__ = 'storage_nodes'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)

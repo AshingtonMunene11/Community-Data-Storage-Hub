@@ -3,7 +3,7 @@ from server.extensions import db
 from server.models.user import User
 
 class Upload(db.Model):
-    _tablename_ = 'uploads'
+    __tablename__ = 'uploads'
 
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255), nullable=False)
