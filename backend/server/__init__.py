@@ -13,7 +13,13 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    CORS(app)
+    # Configure CORS to allow frontend domains
+    allowed_origins = [
+        "http://localhost:3000",  # Local development
+        app.config.get("FRONTEND_URL", "http://localhost:3000"),  # From environment
+        "https://community-data-storage-hub.vercel.app/"  # Allow any Vercel deployment
+    ]
+    CORS(app, origins=allowed_origins)
 
     db.init_app(app)
     ma.init_app(app)
