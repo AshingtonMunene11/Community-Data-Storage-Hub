@@ -18,7 +18,7 @@ MarkupSafe==2.1.5
 marshmallow==3.22.0
 marshmallow-sqlalchemy==1.1.1
 packaging==25.0
-psycopg2-binary==2.9.9
+pg8000==1.31.2
 PyJWT==2.9.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
