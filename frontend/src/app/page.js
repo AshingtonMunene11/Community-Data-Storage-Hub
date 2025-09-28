@@ -41,7 +41,7 @@ export default function LandingPage() {
             Learn More
           </Link>
           <Link
-            href="/dashboard"
+            href="/users"
             className="px-4 py-2 rounded-md bg-white text-green-900 font-bold hover:bg-gray-100 transition-all"
           >
             Get Started

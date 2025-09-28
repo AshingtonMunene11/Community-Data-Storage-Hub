@@ -101,7 +101,7 @@ export default function AboutPage() {
             Home
           </Link>
           <Link
-            href="/contact"
+            href="/users"
             className="px-4 py-2 rounded-md bg-white text-green-900 font-bold hover:bg-gray-100 transition-all"
           >
             Get Started
