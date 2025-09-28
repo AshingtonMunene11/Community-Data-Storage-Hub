@@ -13,6 +13,7 @@ class AllocationSchema(ma.SQLAlchemySchema):
     upload_id = ma.auto_field()
     storage_node_id = ma.auto_field()
     allocated_size = ma.auto_field()
+    chunk_index = ma.auto_field()
 
     upload = fields.Nested(UploadSchema, dump_only=True)
     storage_node = fields.Nested(StorageNodeSchema, dump_only=True)

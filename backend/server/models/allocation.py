@@ -11,5 +11,7 @@ class Allocation(db.Model):
     chunk_index = db.Column(db.Integer, nullable=True)
 
     upload = db.relationship('Upload', backref='allocations')
-    #storage_node = db.relationship('StorageNode', backref='allocations')
     storage_node = db.relationship('StorageNode', backref='allocations')
+    
+    def __repr__(self):
+        return f"<Allocation upload_id={self.upload_id} node_id={self.storage_node_id}>"

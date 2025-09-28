@@ -10,5 +10,5 @@ class StorageNode(db.Model):
     used = db.Column(db.Integer, default=0)
     status = db.Column(db.String(50), default='active')
 
-    def _repr_(self):
+    def __repr__(self):
         return f"<StorageNode {self.name}>"

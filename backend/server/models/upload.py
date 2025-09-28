@@ -12,5 +12,6 @@ class Upload(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     user = db.relationship('User', backref='uploads')
-    #allocations = db.relationship('Allocation', backref='upload', cascade='all, delete-orphan')
-    #allocations = db.relationship('Allocation', back_populates='upload', cascade='all, delete-orphan')
+    
+    def __repr__(self):
+        return f"<Upload {self.filename}>"
