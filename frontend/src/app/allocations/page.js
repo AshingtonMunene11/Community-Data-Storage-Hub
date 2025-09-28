@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import useApi from "@/hooks/useApi";
 import AllocationForm from "@/components/AllocationForm";
 import toast from "react-hot-toast";
@@ -8,17 +8,17 @@ export default function AllocationsPage() {
   const { list, remove } = useApi("/allocations");
   const [allocations, setAllocations] = useState([]);
 
-  const fetchAllocations = async () => {
+  const fetchAllocations = useCallback(async () => {
     try {
       setAllocations(await list());
     } catch {
       toast.error("Failed to load allocations");
     }
-  };
+  }, [list]);
 
   useEffect(() => {
     fetchAllocations();
-  }, []);
+  }, [fetchAllocations]);
 
   return (
     <div className="p-6 space-y-6">

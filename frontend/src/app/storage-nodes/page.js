@@ -62,7 +62,7 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-gray-600 max-w-xl mx-auto"
         >
-          Have questions about our platform? Want to partner with us? We'd love to hear from you.
+          Have questions about our platform? Want to partner with us? We&apos;d love to hear from you.
         </motion.p>
       </div>
 

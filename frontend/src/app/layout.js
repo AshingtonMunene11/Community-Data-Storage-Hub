@@ -2,6 +2,7 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -17,27 +18,27 @@ export default function RootLayout({ children }) {
           <aside className="w-64 bg-white shadow-lg hidden md:flex flex-col">
             <div className="px-6 py-4 text-xl font-bold border-b">Data Hub</div>
             <nav className="flex-1 p-4 space-y-2">
-              <a href="/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
+              <Link href="/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
                 Home
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/dashboard"
                 className="block px-3 py-2 rounded-md hover:bg-gray-100"
               >
                 Dashboard
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/uploads"
                 className="block px-3 py-2 rounded-md hover:bg-gray-100"
               >
                 Uploads
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/users"
                 className="block px-3 py-2 rounded-md hover:bg-gray-100"
               >
                 Log Out
-              </a>
+              </Link>
             </nav>
           </aside>
         )}
