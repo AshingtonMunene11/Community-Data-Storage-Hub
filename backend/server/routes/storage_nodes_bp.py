@@ -4,7 +4,7 @@ from server.models.storage_node import StorageNode
 from server.schemas.storage_node_schema import StorageNodeSchema
 from marshmallow import ValidationError
 
-storage_nodes_bp = Blueprint("storage_nodes", _name_)
+storage_nodes_bp = Blueprint("storage_nodes", __name__)
 storage_node_schema = StorageNodeSchema()
 storage_nodes_schema = StorageNodeSchema(many=True)
 
