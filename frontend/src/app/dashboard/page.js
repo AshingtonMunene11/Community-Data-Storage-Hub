@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { Bar, Pie, Line } from "react-chartjs-2";
 import api from "@/lib/api";
+import DashboardCRUD from "@/components/DashboardCRUD";
 
 // Register Chart.js components
 ChartJS.register(
@@ -37,10 +38,11 @@ export default function Dashboard() {
   const [fileTypes, setFileTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [refreshTrigger]);
 
   const fetchDashboardData = async () => {
     try {
@@ -78,6 +80,10 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDataChange = () => {
+    setRefreshTrigger(prev => prev + 1);
   };
 
   // Chart configurations
@@ -243,6 +249,17 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
+
+        {/* CRUD Management Section */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Data Management</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <DashboardCRUD modelType="user" onDataChange={handleDataChange} />
+            <DashboardCRUD modelType="storage_node" onDataChange={handleDataChange} />
+            <DashboardCRUD modelType="upload" onDataChange={handleDataChange} />
+            <DashboardCRUD modelType="allocation" onDataChange={handleDataChange} />
+          </div>
+        </div>
 
         {/* Stats Cards */}
         {stats && (
