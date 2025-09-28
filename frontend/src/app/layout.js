@@ -11,13 +11,13 @@ export default function RootLayout({ children }) {
           <div className="px-6 py-4 text-xl font-bold border-b">Data Hub</div>
           <nav className="flex-1 p-4 space-y-2">
             <a href="/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-              Dashboard
+              Home
             </a>
             <a
-              href="/allocations"
+              href="/dashboard"
               className="block px-3 py-2 rounded-md hover:bg-gray-100"
             >
-              Allocations
+              Dashboard
             </a>
             <a
               href="/uploads"

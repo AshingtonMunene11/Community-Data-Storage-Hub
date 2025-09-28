@@ -8,7 +8,8 @@ export default function NavBar() {
   return (
     <nav className="bg-blue-600 text-white px-6 py-3 flex justify-between">
       <div className="flex gap-4">
-        <Link href="/">Dashboard</Link>
+        <Link href="/">Home</Link>
+        <Link href="/dashboard">Dashboard</Link>
         <Link href="/users">Users</Link>
         <Link href="/uploads">Uploads</Link>
         <Link href="/allocations">Allocations</Link>

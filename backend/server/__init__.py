@@ -7,6 +7,7 @@ from server.routes.users import users_bp
 from server.routes.upload_routes import upload_bp
 from server.routes.allocation_routes import allocation_bp
 from server.routes.storage_nodes_bp import storage_nodes_bp
+from server.routes.dashboard_routes import dashboard_bp
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +23,7 @@ def create_app():
     app.register_blueprint(upload_bp, url_prefix="/api/uploads")
     app.register_blueprint(allocation_bp, url_prefix="/api/allocations")
     app.register_blueprint(storage_nodes_bp, url_prefix="/api/storage-nodes")
+    app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
 
     @app.route("/")
     def health_check():
@@ -34,6 +36,7 @@ def create_app():
                 "storage_nodes": "/api/storage-nodes/",
                 "uploads": "/api/uploads/",
                 "allocations": "/api/allocations/",
+                "dashboard": "/api/dashboard/",
             },
         }
 
